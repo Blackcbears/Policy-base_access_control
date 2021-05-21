@@ -1,0 +1,40 @@
+SERVICE_NAME: dddbook
+API_VERSION: 1.0
+#app
+server:
+  port: 9999
+  servlet:
+    context-path: /
+spring:
+  profiles:
+    active: local
+  aop:
+    proxy-target-class: true
+    auto: true
+  application:
+    name: ${SERVICE_NAME}
+  kafka:
+    bootstrap-servers: localhost:9092
+  datasource:
+    druid: #德鲁伊配置
+      stat-view-servlet:
+        enabled: true
+        loginUsername: admin
+        loginPassword: LbzyTul3933
+    url: jdbc:mysql://localhost:3306/mytest?useSSL=false&allowPublicKeyRetrieval=true
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+  web:
+    resources:
+      add-mappings: false
+logging:
+  pattern:
+    console: "%date{yyyy-MM-dd HH:mm:ss.SSS,Asia/Shanghai} %X{requestId}-%X{userId} %highlight(%-5level) %logger{36} : %m%n%wEx"
+    file: "%date{yyyy-MM-dd HH:mm:ss.SSS,Asia/Shanghai} %X{requestId}-%X{userId} %highlight(%-5level) %logger{36} : %m%n%wEx"
